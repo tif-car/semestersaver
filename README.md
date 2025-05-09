@@ -1,2 +1,2 @@
-Frontend: React
-Backend: Node.js
+#Frontend: React
+#Backend: Node.js
