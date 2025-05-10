@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 function App() {
-  const [msg, setMsg] = useState("Loading...");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5001/api/hello") // 👈 Flask endpoint
+    fetch("http://127.0.0.1:5002/api/hello")
       .then((res) => res.json())
-      .then((data) => setMsg(data.message))
-      .catch((err) => setMsg("Failed to connect to backend"));
+      .then((data) => setMessage(data.message))
+      .catch((err) => console.error("Failed to fetch:", err));
   }, []);
 
   return (
     <div>
-      <h1>{msg}</h1>
+      <h1>{message || "To do list"}</h1>
+      <h2>Add tasks</h2>
     </div>
   );
 }
