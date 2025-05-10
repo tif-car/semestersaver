@@ -4,16 +4,24 @@ from models.db import get_db_connection
 
 def insert_data():
     data = request.get_json()  # Get the data sent by the frontend
-    name = data["name"]
-    email = data["email"]
+    task = data["task"]  # Extract the task data from the request
 
     try:
+        # Establish database connection
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO your_table_name (name, email) VALUES (%s, %s)", (name, email))
+
+        # Insert the task into the tasks table
+        cursor.execute("INSERT INTO tasks (task) VALUES (%s)", (task,))
         conn.commit()
+
+        # Clean up by closing the cursor and connection
         cursor.close()
         conn.close()
-        return jsonify({"message": "Data inserted successfully!"})
+
+        # Return a success message
+        return jsonify({"message": "Task inserted successfully!"}), 201
     except Exception as e:
-        return jsonify({"message": f"Error inserting data: {e}"}), 500
+        # Return an error message if something goes wrong
+        return jsonify({"message": f"Error inserting task: {str(e)}"}), 500
+
