@@ -1,4 +1,5 @@
 # app.py
+#this is the python version of server.js for javascript
 from flask import Flask
 from flask_cors import CORS
 from routes.insert_route import insert_bp
